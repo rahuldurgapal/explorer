@@ -1,0 +1,70 @@
+@import "style.css";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: beige;
+    width: 500px;
+    margin-top: 50px;
+    padding: 5px;
+    /* display: flex;
+    flex-direction: column; */
+    justify-content: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px 4px rgba(131, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.box {
+    padding: 15px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box p{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: black;
+    text-transform: uppercase;
+}
+
+.box pan{
+    font-weight: bolder;
+    color: rgb(29, 29, 255);
+}
+
+.searchabox{
+    margin: auto;
+    max-width: 500px;
+    display: flex;
+    padding: 5px 10px;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.searchabox input{
+    border: none;
+    outline: none;
+    width: 85%;
+    font-weight: bolder;
+}
+
+.searchabox button{
+    padding: 3px 5px;
+    border: none;
+    background-color: blue;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.searchabox button:hover{
+    background-color: rgb(9, 9, 128)
+}

@@ -1,0 +1,401 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.b-img{
+    position: absolute;
+    height: 100%;
+    z-index: -1;
+    padding: 8vh;
+    left: 0;bottom: 0;
+    background-size: cover;
+}
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    justify-content: right;
+    padding-right: 15vh;
+
+    
+}
+.sign-container{
+   
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+form{
+    width: 400px;
+    
+    }
+.avatar{
+    width: 90px;
+}
+form h2{
+    color: #f99090;
+    font-size: 5vh;
+    text-transform: uppercase;
+}
+.div-input{
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 15px 0;
+    padding: 15px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+.div-input:after, .div-input:before{
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0px;
+    height: 2px;
+    background-color: #cea336;
+    transition: .3s;
+}
+.div-input:after{
+    right: 50%;
+    }
+    .div-input::before{
+        left: 50%;
+    }
+    .div-input.focus .i i{
+    color: #cea336;
+}
+.div-input.focus div h5{
+    top: -5px;
+    font-size: 15px;
+    color: #f1d377;
+}
+.div-input.focus:after,  .div-input.focus:before{
+    width: 50%;
+}
+.div-input.one{
+    margin-top: 0;
+}
+.div-input.two{
+    margin-bottom: 4px;
+    }
+.i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.i i{
+    color: #d9d9d9;
+    transition: .3s;
+}
+.div-input >div{
+    display: relative;
+    height: 45px;
+
+}
+.div-input > div h5{
+    position: absolute;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    transition: 0.3s;
+    color: #d9d9d9;
+
+}
+input{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    border: none;
+    background: none;
+    padding: 0.5rem .7rem;
+    outline: none;
+    font-size: 1.5rem;
+
+}
+.btn{
+    position: relative;
+    display: block;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #f1d377, #f1c044, #f6e57b);
+    color: white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover{
+    background-position: right;
+    color: rgb(109, 105, 105);
+}
+ .google-btn {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            margin: 5px 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            display: inline-block;
+           background-size: 200%;
+            line-height: 20px;
+            background-image: linear-gradient(to right, #f1d377, #f1c044, #f6e57b);
+            color: #fdfdfd;
+            text-decoration: none;
+            transition: 0.3s;
+           
+        }
+        .google:hover{
+            background-position: right;
+            color: rgb(109, 105, 105);
+        }
+          /* Media Query for Mobile Devices */
+     @media screen and (min-width: 50px) and (max-width: 229.99px){
+        body{
+            background-color: #ffd0b2;
+
+        }
+       
+        form{
+            width: 200px;
+            background-color: #f99090;
+            padding: 2vh;
+            border-radius: 3vh;
+        }
+        form h2{
+            color: #feca2d;
+            font-size: 1.4rem;
+            margin: 2px 0;
+        }
+        .container{
+           justify-content: center;
+           padding: 0;
+
+        }
+        .input-div > div h5{
+            font-size: 1rem;
+        }
+        .btn{
+            font-size: 1rem;
+        }
+        .google-btn{
+            font-size: .8rem;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        .avatar{
+            width: 90px;
+        }
+        
+        .b-img{
+            display: none;
+            height: 100vh;
+        }
+        .sign-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+         }
+    }
+     /* Media Query for Mobile Devices */
+     @media screen and (min-width: 230px) and (max-width: 330.99px) {
+        body{
+            background-color: #ffd0b2;
+
+        }
+        form{
+            width: auto;
+            background-color:#f99090;
+            padding: 5vh;
+            border-radius: 7vh;
+        }
+        form h2{
+            color: #feca2d;
+            font-size: 25px;
+            margin: 2px 0;
+        }
+        .input-div > div h5{
+            font-size: 1rem;
+        }
+        .btn{
+            font-size: 1.3rem;
+        }
+        .google-btn{
+            font-size: .7rem;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        
+        .b-img{
+            display: none;
+            height: 100vh;
+        }
+        .container{
+            justify-content: center;
+            padding: 0;
+ 
+         }
+         .sign-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+         }
+    }
+     /* Media Query for Mobile Devices */
+     @media screen and (min-width: 331px) and (max-width: 480.99px)  {
+        body{
+            background-color: #ffd0b2;
+
+        }
+        form{
+            width:auto;
+            background-color: #f99090;
+            padding: 5vh;
+            border-radius: 8vh;
+        }
+        form h2{
+            color: #feca2d;
+            font-size: 2rem;
+            margin: 2px 0;
+        }
+        .input-div > div h5{
+            font-size: 1.1rem;
+        }
+        .btn{
+            font-size: 1.2rem;
+        }
+        .google-btn{
+            font-size: .8rem;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        .container{
+           justify-content: center;
+           padding: 0;
+
+        }
+        
+        .b-img{
+            display: none;
+            height: 100vh;
+        }
+        .sign-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+         }
+    }
+      
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body{
+            background-color: #ffd0b2;
+
+        }
+        .container{
+            justify-content: center;
+            padding: 0;
+ 
+         }
+         .b-img{
+            display: none;
+            height: 100vh;
+        }
+        form{
+            width: auto;
+            background-color: #f99090;
+            padding: 5vh;
+            border-radius: 8vh;
+        }
+        form h2{
+            color: #feca2d;
+            font-size: 2.2rem;
+            margin: 2px 0;
+        }
+        .sign-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+         }
+    }
+      
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px){
+        body{
+            background-color: #ffd0b2;
+
+        }
+        .container{
+            
+            justify-content: center;
+            padding: 0;
+         }
+         .b-img{
+            display: none;
+            height: 100vh;
+        }
+        form{
+            width: auto;
+            background-color: #f99090;
+            padding: 7vh;
+            border-radius: 8vh;
+        }
+        form h2{
+            color: #feca2d;
+
+        }
+        .sign_container{
+            width: 100%;
+            
+            
+            display: flex;
+            justify-content: center;
+         }
+       
+    }
+      
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px){
+               
+        .container{
+            padding: 8vh;
+          }
+        img.b-img{
+            width: 800px;
+            height: 100vh;
+          }
+          form{
+            width: 300px;
+        }
+          
+    }
+      
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        .container{
+            padding: 8vh;
+          }
+        img.b-img{
+            width: 1000px;
+            height: 100hv;
+          }
+          
+          
+    }

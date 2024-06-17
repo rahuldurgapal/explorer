@@ -1,0 +1,284 @@
+<div class="notes_block">
+    <h1 tabindex="-1" id="user-content-readme-building-a-student-data-management-restful-api-with-expressjs" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#readme-building-a-student-data-management-restful-api-with-expressjs">Building a Student Data Management RESTful API with Express.js<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h1><p dir="auto">In
+ this guide, we will walk you through the process of building a RESTful 
+API for managing student data using Node.js and the Express.js 
+framework. This backend code tutorial assumes you have a working 
+knowledge of JavaScript, Node.js, Express.js, and JSON.</p>
+<h2 tabindex="-1" id="user-content-table-of-contents" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#table-of-contents">Table of Contents<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><ol dir="auto"><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#introduction">Introduction</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#http-methods-and-their-meanings">HTTP Methods and Their Meanings</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#starting-the-server-and-receiving-data">Starting the Server and Receiving Data</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#steps-to-set-up-the-api">Steps to Set Up the API</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#explanation-of-the-code">Explanation of the Code</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#api-endpoints">API Endpoints</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#testing-the-api">Testing the API</a></li><li><a href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#conclusion">Conclusion</a></li></ol>
+<h2 tabindex="-1" id="user-content-introduction" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#introduction">Introduction<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">In
+ this tutorial, we'll create a Student Data Management RESTful API that 
+enables various operations on student records. With this API, you can 
+retrieve a list of all student data, access specific student details, 
+insert new student records, update existing student information, and 
+delete student records. It's a comprehensive solution for efficiently 
+managing student data in your application.</p>
+<h2 tabindex="-1" id="user-content-http-methods-and-their-meanings" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#http-methods-and-their-meanings">HTTP Methods and Their Meanings<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">HTTP
+ methods, or verbs, define the type of action to perform on a resource 
+identified by a URL. Here are the HTTP methods used in this API:</p>
+<ul dir="auto"><li><strong>GET:</strong> Retrieve data from a specified resource.</li><li><strong>POST:</strong> Submit data to be processed to a specified resource.</li><li><strong>PUT:</strong> Update a resource or create a new one if it doesn't exist at a specified URL.</li><li><strong>PATCH:</strong> Apply partial modifications to a resource.</li><li><strong>DELETE:</strong> Request the removal of a resource at a specified URL.</li></ul>
+<p dir="auto">These HTTP methods provide a standardized way for clients 
+to interact with web servers and perform various operations on 
+resources, which is essential in a RESTful architecture.</p>
+<h2 tabindex="-1" id="user-content-steps-to-set-up-the-api" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#steps-to-set-up-the-api">Steps to Set Up the API<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">Follow these steps to set up the Student Data Management RESTful API using Express.js:</p>
+<ol dir="auto"><li>
+<p dir="auto"><strong>Create a folder:</strong></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>mkdir crud-RestAPI
+</code></pre><div class="zeroclipboard-container">
+    </div></div></li></ol>
+<p dir="auto"><strong>Initialize npm:</strong></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>npm init -y
+</code></pre><div class="zeroclipboard-container">
+    </div></div>
+<p dir="auto"><strong>Create a JavaScript file:</strong></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>touch index.js
+</code></pre><div class="zeroclipboard-container">
+    </div></div>
+<p dir="auto"><strong>Install Express.js:</strong></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>npm i express
+</code></pre><div class="zeroclipboard-container">
+    </div></div><ol dir="auto"><li value="4"><p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/install.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/install.png" alt="" style="max-width: 100%;"></a></p>
+</li></ol>
+<h2 tabindex="-1" id="user-content-explanation-of-the-code" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#explanation-of-the-code">Explanation of the Code<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">The code in <code>index.js</code> does the following:</p>
+<ul dir="auto"><li>Sets up an Express.js server and initializes an in-memory data store for student records.</li><li>Configures middleware to handle URL-encoded and JSON data in incoming requests.</li></ul>
+<p dir="auto">Please note that the code uses <code>ESM</code> (EcmaScript Module) syntax for importing the Express.js module. There's also a commented line showing how to use Common JS (<code>CJS</code>) syntax.</p>
+<h2 tabindex="-1" id="user-content-starting-the-server-and-receiving-data" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#starting-the-server-and-receiving-data">Starting the Server and Receiving Data<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">In your Express.js code, you start the server and receive data using specific code segments. Here's how it's done:</p>
+<h3 tabindex="-1" id="user-content-starting-the-server" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#starting-the-server">Starting the Server<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h3><p dir="auto">In your JavaScript file (e.g., <code>index.js</code>), you start the server by listening on a specific port. If the <code>process.env.port</code> environment variable is not defined, the server will default to port 3000. Here's the relevant code:</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">const</span> <span class="pl-s1">port</span> <span class="pl-c1">=</span> <span class="pl-s1">process</span><span class="pl-kos">.</span><span class="pl-c1">env</span><span class="pl-kos">.</span><span class="pl-c1">port</span> <span class="pl-c1">||</span> <span class="pl-c1">3000</span><span class="pl-kos">;</span>
+
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">listen</span><span class="pl-kos">(</span><span class="pl-s1">port</span><span class="pl-kos">,</span> <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">'Server is running at: http://localhost:3000'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div><p dir="auto">This code sets up the server and starts 
+it. You'll see a message in the console indicating that the server is 
+running at a specific URL, typically <code>http://localhost:3000</code>.</p>
+<h3 tabindex="-1" id="user-content-receiving-data-with-middleware" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#receiving-data-with-middleware">Receiving Data with Middleware<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h3><p dir="auto">In
+ your Express application, you use middleware to handle incoming 
+requests. Two important middleware functions are configured to handle 
+URL-encoded and JSON data in incoming requests. Here's how this is set 
+up:</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-s1">express</span><span class="pl-kos">.</span><span class="pl-en">urlencoded</span><span class="pl-kos">(</span><span class="pl-kos">{</span> <span class="pl-c1">extended</span>: <span class="pl-c1">true</span> <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-s1">express</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div><ul dir="auto"><li>
+<p dir="auto"><code>express.urlencoded({ extended: true })</code> is middleware that parses incoming requests with URL-encoded payloads. This is commonly used to parse data sent by HTML forms.</p>
+</li><li>
+<p dir="auto"><code>express.json()</code> is middleware that parses 
+incoming requests with JSON payloads. It allows your application to 
+handle JSON data sent in the request body.</p>
+</li></ul>
+<p dir="auto">These middleware configurations ensure that your API can properly receive and process data sent in various formats.</p>
+<p dir="auto">Now, with these additions, you have the complete process 
+of starting the server and receiving data in your Express.js 
+application, making it easier for users to understand how your API 
+works.</p>
+<h2 tabindex="-1" id="user-content-api-endpoints" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#api-endpoints">API Endpoints<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">The API provides the following endpoints:</p>
+<h2 tabindex="-1" id="user-content-storing-and-rendering-json-data" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#storing-and-rendering-json-data">Storing and Rendering JSON Data<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">In your Express.js code, you store and render JSON data using the <code>data</code> variable. Here's how this part of the code works:</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">let</span> <span class="pl-s1">data</span> <span class="pl-c1">=</span> <span class="pl-kos">[</span>
+    <span class="pl-kos">{</span> <span class="pl-s">"name"</span>: <span class="pl-s">"Arjun Tripathi"</span><span class="pl-kos">,</span> <span class="pl-s">"course"</span>: <span class="pl-s">"MCA"</span><span class="pl-kos">,</span> <span class="pl-s">"roll_no"</span>: <span class="pl-s">"14"</span><span class="pl-kos">,</span> <span class="pl-s">"id"</span>: <span class="pl-c1">1</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
+    <span class="pl-kos">{</span> <span class="pl-s">"name"</span>: <span class="pl-s">"Rahul Durgapal"</span><span class="pl-kos">,</span> <span class="pl-s">"course"</span>: <span class="pl-s">"MCA"</span><span class="pl-kos">,</span> <span class="pl-s">"roll_no"</span>: <span class="pl-s">"36"</span><span class="pl-kos">,</span> <span class="pl-s">"id"</span>: <span class="pl-c1">2</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
+    <span class="pl-kos">{</span> <span class="pl-s">"name"</span>: <span class="pl-s">"Aniket Yadav"</span><span class="pl-kos">,</span> <span class="pl-s">"course"</span>: <span class="pl-s">"MCA"</span><span class="pl-kos">,</span> <span class="pl-s">"roll_no"</span>: <span class="pl-s">"08"</span><span class="pl-kos">,</span> <span class="pl-s">"id"</span>: <span class="pl-c1">3</span> <span class="pl-kos">}</span>
+<span class="pl-kos">]</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div><p dir="auto">In the above code, an array named <code>data</code>
+ is initialized. This array acts as an in-memory database where you can 
+store and manipulate student data without using an external database. 
+You can modify this array to include additional student records.</p>
+<p dir="auto">When you define your API endpoints and handle incoming requests, you often interact with this <code>data</code>
+ variable to read or modify student records. For example, when you 
+retrieve data, you send the contents of this array as a JSON response:</p>
+<p dir="auto">By using the <code>data</code> variable, you can 
+effectively manage student data within your Express.js application 
+without the need for an external database. This in-memory database 
+simplifies the development process and helps you learn and experiment 
+with building APIs.</p>
+<ul dir="auto"><li>
+<p dir="auto"><strong>Get All Student Data (Read)</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/</code></p>
+</li><li>
+<p dir="auto">Method: GET</p>
+</li><li>
+<p dir="auto">Description: Retrieves a list of all student records.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /</span>
+<span class="pl-c">// Method: GET</span>
+<span class="pl-c">// Description: Retrieves a list of all student records</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">get</span><span class="pl-kos">(</span><span class="pl-s">'/'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">200</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul></li></ul>
+<p dir="auto"><strong>Get a Single Student Record (Read)</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/:id</code></p>
+</li><li>
+<p dir="auto">Method: GET</p>
+</li><li>
+<p dir="auto">Description: Retrieves a single student record by providing the <code>id</code> parameter.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /:id</span>
+<span class="pl-c">// Method: GET</span>
+<span class="pl-c">// Description: Retrieves a single student record by providing the 'id' parameter</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">get</span><span class="pl-kos">(</span><span class="pl-s">"/:id"</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">found</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">item</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">return</span> <span class="pl-s1">item</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c1">===</span> <span class="pl-en">parseInt</span><span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">params</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">200</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">sendStatus</span><span class="pl-kos">(</span><span class="pl-c1">404</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul>
+<p dir="auto"><strong>Insert a New Student Record (Create)</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/</code></p>
+</li><li>
+<p dir="auto">Method: POST</p>
+</li><li>
+<p dir="auto">Description: Adds a new student record to the collection.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /</span>
+<span class="pl-c">// Method: POST</span>
+<span class="pl-c">// Description: Adds a new student record to the collection</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">post</span><span class="pl-kos">(</span><span class="pl-s">'/'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">items</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">map</span><span class="pl-kos">(</span><span class="pl-s1">item</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">item</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">let</span> <span class="pl-s1">newId</span> <span class="pl-c1">=</span> <span class="pl-s1">items</span><span class="pl-kos">.</span><span class="pl-c1">length</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> ? <span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-c1">max</span><span class="pl-kos">.</span><span class="pl-en">apply</span><span class="pl-kos">(</span><span class="pl-v">Math</span><span class="pl-kos">,</span> <span class="pl-s1">items</span><span class="pl-kos">)</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span> : <span class="pl-c1">1</span><span class="pl-kos">;</span>
+    <span class="pl-k">let</span> <span class="pl-s1">newItem</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+        <span class="pl-c1">id</span>: <span class="pl-s1">newId</span><span class="pl-kos">,</span>
+        <span class="pl-c1">name</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">,</span>
+        <span class="pl-c1">course</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">course</span><span class="pl-kos">,</span>
+        <span class="pl-c1">roll_no</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">roll_no</span>
+    <span class="pl-kos">}</span><span class="pl-kos">;</span>
+    <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">push</span><span class="pl-kos">(</span><span class="pl-s1">newItem</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">201</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">{</span> <span class="pl-s">'message'</span>: <span class="pl-s">"successfully created"</span> <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul>
+<p dir="auto"><strong>Update a Student Record (Update)</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/:id</code></p>
+</li><li>
+<p dir="auto">Method: PUT</p>
+</li><li>
+<p dir="auto">Description: Updates an existing student record by providing the <code>id</code> parameter.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /:id</span>
+<span class="pl-c">// Method: PUT</span>
+<span class="pl-c">// Description: Updates an existing student record by providing the 'id' parameter</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">put</span><span class="pl-kos">(</span><span class="pl-s">'/:id'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">found</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">item</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">return</span> <span class="pl-s1">item</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c1">===</span> <span class="pl-en">parseInt</span><span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">params</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">let</span> <span class="pl-s1">updateData</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+            <span class="pl-c1">id</span>: <span class="pl-s1">found</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">,</span>
+            <span class="pl-c1">name</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">,</span>
+            <span class="pl-c1">course</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">course</span><span class="pl-kos">,</span>
+            <span class="pl-c1">roll_no</span>: <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">roll_no</span>
+        <span class="pl-kos">}</span><span class="pl-kos">;</span>
+        <span class="pl-k">let</span> <span class="pl-s1">targetIndex</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">indexOf</span><span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">splice</span><span class="pl-kos">(</span><span class="pl-s1">targetIndex</span><span class="pl-kos">,</span> <span class="pl-c1">1</span><span class="pl-kos">,</span> <span class="pl-s1">updateData</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">201</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">{</span> <span class="pl-s">'message'</span>: <span class="pl-s">"data updated"</span> <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">404</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">{</span>
+            <span class="pl-s">'message'</span>: <span class="pl-s">'unable to insert data because data inserted not matched'</span>
+        <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul>
+<p dir="auto"><strong>Partially Update a Student Record (Update)</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/:id</code></p>
+</li><li>
+<p dir="auto">Method: PATCH</p>
+</li><li>
+<p dir="auto">Description: Partially updates an existing student record by providing the <code>id</code> parameter. You can update one or more fields individually.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /:id</span>
+<span class="pl-c">// Method: PATCH</span>
+<span class="pl-c">// Description: Partially updates an existing student record by providing the 'id' parameter. You can update one or more fields individually.</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">patch</span><span class="pl-kos">(</span><span class="pl-s">"/:id"</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">found</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">item</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">return</span> <span class="pl-s1">item</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c1">===</span> <span class="pl-en">parseInt</span><span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">params</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+            <span class="pl-s1">found</span><span class="pl-kos">.</span><span class="pl-c1">name</span> <span class="pl-c1">=</span> <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">course</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+            <span class="pl-s1">found</span><span class="pl-kos">.</span><span class="pl-c1">course</span> <span class="pl-c1">=</span> <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">course</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">roll_no</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+            <span class="pl-s1">found</span><span class="pl-kos">.</span><span class="pl-c1">roll_no</span> <span class="pl-c1">=</span> <span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">roll_no</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">201</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">{</span> <span class="pl-s">"message"</span>: <span class="pl-s">"data updated"</span> <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">status</span><span class="pl-kos">(</span><span class="pl-c1">404</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">json</span><span class="pl-kos">(</span><span class="pl-kos">{</span>
+            <span class="pl-s">'message'</span>: <span class="pl-s">'unable to insert data because data inserted not matched'</span>
+        <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul>
+<p dir="auto"><strong>Delete a Student Record</strong></p>
+<ul dir="auto"><li>
+<p dir="auto">Endpoint: <code>/:id</code></p>
+</li><li>
+<p dir="auto">Method: DELETE</p>
+</li><li>
+<p dir="auto">Description: Deletes an existing student record by providing the <code>id</code> parameter.</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c">// Endpoint: /:id</span>
+<span class="pl-c">// Method: DELETE</span>
+<span class="pl-c">// Description: Deletes an existing student record by providing the 'id' parameter</span>
+<span class="pl-s1">app</span><span class="pl-kos">.</span><span class="pl-en">delete</span><span class="pl-kos">(</span><span class="pl-s">'/:id'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">,</span> <span class="pl-s1">res</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">found</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">item</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">return</span> <span class="pl-s1">item</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c1">===</span> <span class="pl-en">parseInt</span><span class="pl-kos">(</span><span class="pl-s1">req</span><span class="pl-kos">.</span><span class="pl-c1">params</span><span class="pl-kos">.</span><span class="pl-c1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">let</span> <span class="pl-s1">targetIndex</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">indexOf</span><span class="pl-kos">(</span><span class="pl-s1">found</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">splice</span><span class="pl-kos">(</span><span class="pl-s1">targetIndex</span><span class="pl-kos">,</span> <span class="pl-c1">1</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">sendStatus</span><span class="pl-kos">(</span><span class="pl-c1">204</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>
+        <span class="pl-s1">res</span><span class="pl-kos">.</span><span class="pl-en">sendStatus</span><span class="pl-kos">(</span><span class="pl-c1">404</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre><div class="zeroclipboard-container">
+    </div></div></li></ul><p dir="auto">For each endpoint, the 
+documentation provides information about the HTTP method, the endpoint 
+URL, and the expected request and response formats.</p>
+<h2 tabindex="-1" id="user-content-testing-the-api" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#testing-the-api">Testing the API<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><p dir="auto">To
+ test the API endpoints you've defined in your code, you can use tools 
+like Postman or ThunderClient (an extension for Visual Studio Code).</p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/testing.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/testing.png" alt="" style="max-width: 100%;"></a></p>
+<h3 tabindex="-1" id="user-content-testing-the-api-with-postman" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#testing-the-api-with-postman">Testing the API with Postman<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h3><p dir="auto">To
+ test the API endpoints, we recommend using a tool like Postman. 
+However, you can use any API testing tool of your choice. Here, we'll 
+demonstrate how to use Postman to interact with your API.</p>
+<ol dir="auto"><li>
+<p dir="auto"><strong>GET Request</strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/get.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/get.png" alt="GET Request" style="max-width: 100%;"></a></p>
+</li><li>
+<p dir="auto"><strong>POST Request</strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/post.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/post.png" alt="POST Request" style="max-width: 100%;"></a></p>
+</li><li>
+<p dir="auto"><strong>PUT Request</strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/put.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/put.png" alt="PUT Request" style="max-width: 100%;"></a></p>
+<p dir="auto">To check the update, use a <strong>GET Request with a single user</strong>:</p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/put-get.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/put-get.png" alt="GET Request with Single User" style="max-width: 100%;"></a></p>
+</li><li>
+<p dir="auto"><strong>PATCH Request</strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/patch.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/patch.png" alt="PATCH Request" style="max-width: 100%;"></a></p>
+<p dir="auto">For verification, use a <strong>GET Request with a single user</strong>:</p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/patch-get.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/patch-get.png" alt="GET Request with Single User" style="max-width: 100%;"></a></p>
+</li><li>
+<p dir="auto"><strong>DELETE Request</strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/delete.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/delete.png" alt="DELETE Request" style="max-width: 100%;"></a></p>
+<p dir="auto">To retrieve all data, send a <strong>GET Request</strong>:</p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mearjuntripathi/nodejs/blob/main/crud-RESTAPI/image/get.png"><img src="https://github.com/mearjuntripathi/nodejs/raw/main/crud-RESTAPI/image/get.png" alt="GET All Data" style="max-width: 100%;"></a></p>
+</li></ol>
+<p dir="auto">In these screenshots, you can observe the interactions 
+with your API. In the GET request, you see all elements. In the POST 
+request, you insert one element. In the PUT request, you update it, but 
+it overwrites the existing data. To demonstrate an update without 
+overwriting, you use a PATCH request. Finally, you delete the inserted 
+data using a DELETE request.</p>
+<p dir="auto">Feel free to use these examples and adjust them to your 
+specific API testing needs. Postman is a powerful tool for API 
+development and testing, making it easier to validate your API's 
+functionality and behavior.</p>
+<h2 tabindex="-1" id="user-content-conclusion" dir="auto"><a class="heading-link" href="https://github.com/mearjuntripathi/nodejs/tree/main/crud-RESTAPI#conclusion">Conclusion<svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"></svg></a></h2><div class="Box-sc-g0xbh4-0 faROye"><div id="readme" class="Box-sc-g0xbh4-0 eOiqoB"><div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><p dir="auto">This
+ API offers basic functionality for managing student data, allowing you 
+to create, retrieve, update, and delete student records in JSON format. 
+For further enhancements, consider adding authentication and validation 
+for robust security and data integrity.</p></article></div></div></div>
+</div>
