@@ -1,8 +1,8 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(E_WARNING|E_NOTICE);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-
+error_reporting(E_ALL);
 include("../../app/db_connection.php");
 $topic_name = "";
 $teacher_name = "";
@@ -11,23 +11,22 @@ $html_content = "";
 $update = false;
     if(isset($_GET['id'])){
         $update = true;
-        $notes_id = intval($_GET['id']);
-$result = mysqli_query($con, "SELECT * FROM notes WHERE notes_id = $notes_id");
-if (!$result) {
-    echo 'Could not run query: ' . mysqli_error($con);
-    exit;
-}
-
+        $result = mysqli_query($con,"SELECT * FROM notes WHERE notes_id = $_GET[id]");
+        if (!$result) {
+            echo 'Could not run query: ' . mysql_error();
+            exit;
+        }
         $row = mysqli_fetch_assoc($result);
         $topic_name = "$row[notes_topic]";
         $teacher_name = "$row[notes_author]";
         $subject_name = "$row[notes_subject]";
-        $html_url = '../Notes/' . $row['notes_link'];
-$html_content = file_get_contents($html_url);
+        $html_url = '../Notes/'.$row['notes_link'];
 
-if ($html_content === false) {
-    die('Failed to fetch the HTML content.');
-}
+        $html_content = file_get_contents($html_url);
+
+        if ($html_content === false) {
+            die('Failed to fetch the HTML content.');
+        }
 
     }else{
         $update = false;
